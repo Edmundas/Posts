@@ -16,9 +16,6 @@
 		18346267291691CA0006BCB4 /* PostsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18346266291691CA0006BCB4 /* PostsTests.swift */; };
 		18346271291691CA0006BCB4 /* PostsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18346270291691CA0006BCB4 /* PostsUITests.swift */; };
 		18346273291691CA0006BCB4 /* PostsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18346272291691CA0006BCB4 /* PostsUITestsLaunchTests.swift */; };
-		1834628329169AB60006BCB4 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1834628229169AB60006BCB4 /* AppCoordinator.swift */; };
-		1834628629169B4A0006BCB4 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1834628529169B4A0006BCB4 /* BaseCoordinator.swift */; };
-		1834628929169D940006BCB4 /* PostsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1834628829169D940006BCB4 /* PostsCoordinator.swift */; };
 		1834628B2916A3D90006BCB4 /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1834628A2916A3D90006BCB4 /* PostsViewModel.swift */; };
 		1834628D2916A3FA0006BCB4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1834628C2916A3FA0006BCB4 /* BaseViewController.swift */; };
 		1834628F2916A4040006BCB4 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1834628E2916A4040006BCB4 /* BaseViewModel.swift */; };
@@ -58,9 +55,6 @@
 		1834626C291691CA0006BCB4 /* PostsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PostsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18346270291691CA0006BCB4 /* PostsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsUITests.swift; sourceTree = "<group>"; };
 		18346272291691CA0006BCB4 /* PostsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		1834628229169AB60006BCB4 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		1834628529169B4A0006BCB4 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
-		1834628829169D940006BCB4 /* PostsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsCoordinator.swift; sourceTree = "<group>"; };
 		1834628A2916A3D90006BCB4 /* PostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
 		1834628C2916A3FA0006BCB4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		1834628E2916A4040006BCB4 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -167,7 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				1834628429169B380006BCB4 /* Base */,
-				1834628229169AB60006BCB4 /* AppCoordinator.swift */,
 				1834628729169D7A0006BCB4 /* PostsFlow */,
 			);
 			path = Presentation;
@@ -176,7 +169,6 @@
 		1834628429169B380006BCB4 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				1834628529169B4A0006BCB4 /* BaseCoordinator.swift */,
 				1834628C2916A3FA0006BCB4 /* BaseViewController.swift */,
 				1834628E2916A4040006BCB4 /* BaseViewModel.swift */,
 			);
@@ -186,7 +178,6 @@
 		1834628729169D7A0006BCB4 /* PostsFlow */ = {
 			isa = PBXGroup;
 			children = (
-				1834628829169D940006BCB4 /* PostsCoordinator.swift */,
 				18346250291691C90006BCB4 /* PostsViewController.swift */,
 				1834628A2916A3D90006BCB4 /* PostsViewModel.swift */,
 				183462932916B7110006BCB4 /* PostTableViewCell.swift */,
@@ -344,12 +335,9 @@
 				183462942916B7110006BCB4 /* PostTableViewCell.swift in Sources */,
 				1834628F2916A4040006BCB4 /* BaseViewModel.swift in Sources */,
 				18346251291691C90006BCB4 /* PostsViewController.swift in Sources */,
-				1834628929169D940006BCB4 /* PostsCoordinator.swift in Sources */,
 				1834624D291691C90006BCB4 /* AppDelegate.swift in Sources */,
 				183462972916EA680006BCB4 /* UIControl+Ext.swift in Sources */,
 				1834628D2916A3FA0006BCB4 /* BaseViewController.swift in Sources */,
-				1834628629169B4A0006BCB4 /* BaseCoordinator.swift in Sources */,
-				1834628329169AB60006BCB4 /* AppCoordinator.swift in Sources */,
 				1834624F291691C90006BCB4 /* SceneDelegate.swift in Sources */,
 				18346257291691CA0006BCB4 /* Posts.xcdatamodeld in Sources */,
 				1834628B2916A3D90006BCB4 /* PostsViewModel.swift in Sources */,
