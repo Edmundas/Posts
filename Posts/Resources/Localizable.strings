@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  Posts
+
+  Created by Edmundas Matusevičius on 2022-11-05.
+  
+*/
+
+"titleError" = "Error";
+"titlePosts" = "Posts";
+"titleEmpty" = "Empty";
+
+"actionCancel" = "Action";
+"actionRetry" = "Retry";
+"actionPullToRefresh" = "Pull to refresh";
