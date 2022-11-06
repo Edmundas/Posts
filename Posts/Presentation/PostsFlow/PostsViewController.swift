@@ -83,13 +83,8 @@ class PostsViewController: BaseViewController<PostsViewModel> {
     }
 
     private func setupBindings() {
-        refreshControl.publisher(for: .valueChanged)
-            .sink { [weak self] in
-                self?.viewModel.onRefresh()
-            }
-            .store(in: &cancellables)
-
         viewModel.retryPublisher
+            .merge(with: refreshControl.publisher(for: .valueChanged))
             .sink { [weak self] in
                 self?.viewModel.onRefresh()
             }
@@ -97,7 +92,7 @@ class PostsViewController: BaseViewController<PostsViewModel> {
 
         viewModel.$posts
             .compactMap { $0 }
-            .receive(on: DispatchQueue.main)
+            .receive(on: RunLoop.main)
             .sink { [weak self] posts in
                 self?.refreshControl.endRefreshing()
                 self?.emptyLabel.isHidden = !posts.isEmpty

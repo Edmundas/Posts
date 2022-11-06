@@ -19,7 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
 
-        let postsViewModel = PostsViewModel()
+        let networkProvider = NetworkProviderImpl()
+        let usersService = UsersServiceImpl(networkProvider: networkProvider)
+        let usersRepository = UsersRepositoryImpl(usersService: usersService)
+        let postsService = PostsServiceImpl(networkProvider: networkProvider)
+        let postsRepository = PostsRepositoryImpl(postsService: postsService, usersRepository: usersRepository)
+        let postsViewModel = PostsViewModel(postsRepository: postsRepository)
         let postsViewController = PostsViewController(viewModel: postsViewModel)
         let navigationController = UINavigationController(rootViewController: postsViewController)
 
