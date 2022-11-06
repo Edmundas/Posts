@@ -10,6 +10,6 @@
 "titlePosts" = "Posts";
 "titleEmpty" = "Empty";
 
-"actionCancel" = "Action";
+"actionCancel" = "Cancel";
 "actionRetry" = "Retry";
 "actionPullToRefresh" = "Pull to refresh";

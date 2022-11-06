@@ -41,6 +41,7 @@ class BaseViewController<VM: BaseViewModel>: UIViewController {
     // MARK: - Private methods
     private func setupBindings() {
         viewModel.errorPublisher
+            .receive(on: RunLoop.main)
             .sink { [weak self] error in
                 let alertController = UIAlertController(title: NSLocalizedString("titleError", comment: ""), message: error.localizedDescription, preferredStyle: .alert)
                 let retryAction = UIAlertAction(title: NSLocalizedString("actionRetry", comment: ""), style: .default) { [weak self] _ in

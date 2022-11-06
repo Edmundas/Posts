@@ -83,6 +83,13 @@ class PostsViewController: BaseViewController<PostsViewModel> {
     }
 
     private func setupBindings() {
+        viewModel.errorPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.refreshControl.endRefreshing()
+            }
+            .store(in: &cancellables)
+
         viewModel.retryPublisher
             .merge(with: refreshControl.publisher(for: .valueChanged))
             .sink { [weak self] in
