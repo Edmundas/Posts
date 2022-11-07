@@ -29,12 +29,12 @@ class PostsRepositoryImpl: PostsRepository {
     // MARK: - Public methods
     func fetchPosts() -> AnyPublisher<[Post], Error> {
         postsService.getPosts()
-            .flatMap(testUsers)
+            .flatMap(fetchUsers)
             .eraseToAnyPublisher()
     }
 
     // MARK: - Private methods
-    private func testUsers(_ posts: [PostDTO]) -> AnyPublisher<[Post], Error> {
+    private func fetchUsers(_ posts: [PostDTO]) -> AnyPublisher<[Post], Error> {
         let ids = Array(Set(posts.map { $0.userId} ))
         let resultSubject = PassthroughSubject<[Post], Error>()
 

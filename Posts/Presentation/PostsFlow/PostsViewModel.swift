@@ -50,9 +50,14 @@ class PostsViewModel: BaseViewModel {
             .sink { [weak self] completion in
                 switch completion {
                 case .failure(let error):
-                    self?.errorSubject.send(error)
-                    #warning("_FETCH_POSTS_ERROR")
-                    debugPrint(error)
+                    if let error = error as? NetworkError {
+                        switch error {
+                        case .unknown(let unknownError):
+                            self?.errorSubject.send(unknownError)
+                        }
+                    } else {
+                        self?.errorSubject.send(error)
+                    }
                 case .finished:
                     return
                 }
