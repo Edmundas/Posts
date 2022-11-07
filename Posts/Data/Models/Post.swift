@@ -17,4 +17,15 @@ struct Post: Decodable {
         self.title = post.title
         self.user = user
     }
+
+    init(_ post: PostEntity) {
+        self.id = Int(post.id)
+        self.title = post.title
+        if let user = post.user {
+            self.user = User(user)
+        } else {
+            self.user = nil
+        }
+    }
+
 }

@@ -7,33 +7,58 @@
 
 import Foundation
 import Combine
+import CoreData
 
 protocol UsersRepository {
-    func fetchUser(id: Int) -> AnyPublisher<User, Error>
-    func fetchUsers(by ids: [Int]) -> AnyPublisher<[User], Error>
+    func fetchUsers() -> AnyPublisher<[User], Error>
+    func syncUsers(by ids: [Int]) -> AnyPublisher<[User], Error>
 }
 
 class UsersRepositoryImpl: UsersRepository {
 
     // MARK: - Private variables
     private let usersService: UsersService
+    private let usersStorage: UsersStorage
+
+    private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Lifecycle
-    init(usersService: UsersService) {
+    init(usersService: UsersService, usersStorage: UsersStorage) {
         self.usersService = usersService
+        self.usersStorage = usersStorage
     }
 
     // MARK: - Public methods
-    func fetchUser(id: Int) -> AnyPublisher<User, Error> {
-        usersService.getUser(id: id)
-            .map { User($0) }
+    func fetchUsers() -> AnyPublisher<[User], Error> {
+        usersStorage.fetchUsers()
+            .map { users in
+                users.map { User($0) }
+            }
             .eraseToAnyPublisher()
     }
 
-    func fetchUsers(by ids: [Int]) -> AnyPublisher<[User], Error> {
+    func syncUsers(by ids: [Int]) -> AnyPublisher<[User], Error> {
+        let resultSubject = PassthroughSubject<[User], Error>()
+
         ids.publisher
-            .flatMap(fetchUser)
+            .flatMap(syncUser)
             .collect()
+            .sink { completion in
+                resultSubject.send(completion: completion)
+            } receiveValue: { [weak self] users in
+                self?.usersStorage.saveUsers(users)
+                resultSubject.send(users)
+            }
+            .store(in: &cancellables)
+
+
+        return resultSubject.eraseToAnyPublisher()
+    }
+
+    // MARK: - Private methods
+    private func syncUser(id: Int) -> AnyPublisher<User, Error> {
+        usersService.getUser(id: id)
+            .map { User($0) }
             .eraseToAnyPublisher()
     }
 

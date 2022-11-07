@@ -7,38 +7,60 @@
 
 import Foundation
 import Combine
+import CoreData
 
 protocol PostsRepository {
     func fetchPosts() -> AnyPublisher<[Post], Error>
+    func syncPosts() -> AnyPublisher<[Post], Error>
 }
 
 class PostsRepositoryImpl: PostsRepository {
 
     // MARK: - Private variables
     private let postsService: PostsService
+    private let postsStorage: PostsStorage
     private let usersRepository: UsersRepository
 
-    var cancellables = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Lifecycle
-    init(postsService: PostsService, usersRepository: UsersRepository) {
+    init(postsService: PostsService, postsStorage: PostsStorage, usersRepository: UsersRepository) {
         self.postsService = postsService
+        self.postsStorage = postsStorage
         self.usersRepository = usersRepository
     }
 
     // MARK: - Public methods
     func fetchPosts() -> AnyPublisher<[Post], Error> {
-        postsService.getPosts()
-            .flatMap(fetchUsers)
+        postsStorage.fetchPosts()
+            .map { entities in
+                entities.map { Post($0) }
+            }
             .eraseToAnyPublisher()
     }
 
+    func syncPosts() -> AnyPublisher<[Post], Error> {
+        let resultSubject = PassthroughSubject<[Post], Error>()
+
+        postsService.getPosts()
+            .flatMap(syncUsers)
+            .sink { completion in
+                resultSubject.send(completion: completion)
+            } receiveValue: { [weak self] posts in
+                self?.postsStorage.savePosts(posts)
+                resultSubject.send(posts)
+            }
+            .store(in: &cancellables)
+
+        return resultSubject.eraseToAnyPublisher()
+    }
+
     // MARK: - Private methods
-    private func fetchUsers(_ posts: [PostDTO]) -> AnyPublisher<[Post], Error> {
+    private func syncUsers(_ posts: [PostDTO]) -> AnyPublisher<[Post], Error> {
         let ids = Array(Set(posts.map { $0.userId} ))
         let resultSubject = PassthroughSubject<[Post], Error>()
 
-        usersRepository.fetchUsers(by: ids)
+        usersRepository.syncUsers(by: ids)
             .sink { completion in
                 resultSubject.send(completion: completion)
             } receiveValue: { users in

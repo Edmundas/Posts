@@ -36,6 +36,10 @@
 		183462B52917A9D60006BCB4 /* UsersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183462B42917A9D60006BCB4 /* UsersRepository.swift */; };
 		183462B82917DBC80006BCB4 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183462B72917DBC80006BCB4 /* Post.swift */; };
 		183462BA2917DBE70006BCB4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183462B92917DBE70006BCB4 /* User.swift */; };
+		183462BF2917E9430006BCB4 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183462BB2917E9430006BCB4 /* UserEntity.swift */; };
+		183462C12917E9430006BCB4 /* PostEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183462BD2917E9430006BCB4 /* PostEntity.swift */; };
+		183462C7291808890006BCB4 /* UsersStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183462C6291808890006BCB4 /* UsersStorage.swift */; };
+		183462C929180A0F0006BCB4 /* PostsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183462C829180A0F0006BCB4 /* PostsStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +93,10 @@
 		183462B42917A9D60006BCB4 /* UsersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersRepository.swift; sourceTree = "<group>"; };
 		183462B72917DBC80006BCB4 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		183462B92917DBE70006BCB4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		183462BB2917E9430006BCB4 /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
+		183462BD2917E9430006BCB4 /* PostEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEntity.swift; sourceTree = "<group>"; };
+		183462C6291808890006BCB4 /* UsersStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersStorage.swift; sourceTree = "<group>"; };
+		183462C829180A0F0006BCB4 /* PostsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,7 +228,7 @@
 				183462B62917DBBF0006BCB4 /* Models */,
 				1834629D29178F9C0006BCB4 /* Repositories */,
 				183462A029178FB00006BCB4 /* Network */,
-				18346255291691CA0006BCB4 /* Posts.xcdatamodeld */,
+				183462C32917EA0E0006BCB4 /* Core Data */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -297,6 +305,34 @@
 				183462B92917DBE70006BCB4 /* User.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		183462C32917EA0E0006BCB4 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				183462C42917EA1E0006BCB4 /* Entities */,
+				183462C52918087B0006BCB4 /* Storages */,
+				18346255291691CA0006BCB4 /* Posts.xcdatamodeld */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		183462C42917EA1E0006BCB4 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				183462BB2917E9430006BCB4 /* UserEntity.swift */,
+				183462BD2917E9430006BCB4 /* PostEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		183462C52918087B0006BCB4 /* Storages */ = {
+			isa = PBXGroup;
+			children = (
+				183462C6291808890006BCB4 /* UsersStorage.swift */,
+				183462C829180A0F0006BCB4 /* PostsStorage.swift */,
+			);
+			path = Storages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,7 +466,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183462C929180A0F0006BCB4 /* PostsStorage.swift in Sources */,
+				183462C12917E9430006BCB4 /* PostEntity.swift in Sources */,
 				183462942916B7110006BCB4 /* PostTableViewCell.swift in Sources */,
+				183462BF2917E9430006BCB4 /* UserEntity.swift in Sources */,
 				183462B82917DBC80006BCB4 /* Post.swift in Sources */,
 				183462B52917A9D60006BCB4 /* UsersRepository.swift in Sources */,
 				1834629C29178E8F0006BCB4 /* PostDTO.swift in Sources */,
@@ -440,6 +479,7 @@
 				1834624D291691C90006BCB4 /* AppDelegate.swift in Sources */,
 				183462A329178FCC0006BCB4 /* PostsService.swift in Sources */,
 				183462972916EA680006BCB4 /* UIControl+Ext.swift in Sources */,
+				183462C7291808890006BCB4 /* UsersStorage.swift in Sources */,
 				183462B32917A77A0006BCB4 /* UsersService.swift in Sources */,
 				1834628D2916A3FA0006BCB4 /* BaseViewController.swift in Sources */,
 				1834624F291691C90006BCB4 /* SceneDelegate.swift in Sources */,

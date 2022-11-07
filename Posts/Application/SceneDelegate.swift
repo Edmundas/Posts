@@ -16,14 +16,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
-
         let window = UIWindow(windowScene: windowScene)
 
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+
         let networkProvider = NetworkProviderImpl()
+
         let usersService = UsersServiceImpl(networkProvider: networkProvider)
-        let usersRepository = UsersRepositoryImpl(usersService: usersService)
+        let usersStorage = UsersStorageImpl(managedContext: managedContext)
+        let usersRepository = UsersRepositoryImpl(usersService: usersService, usersStorage: usersStorage)
+
         let postsService = PostsServiceImpl(networkProvider: networkProvider)
-        let postsRepository = PostsRepositoryImpl(postsService: postsService, usersRepository: usersRepository)
+        let postsStorage = PostsStorageImpl(managedContext: managedContext)
+        let postsRepository = PostsRepositoryImpl(postsService: postsService, postsStorage: postsStorage, usersRepository: usersRepository)
+
         let postsViewModel = PostsViewModel(postsRepository: postsRepository)
         let postsViewController = PostsViewController(viewModel: postsViewModel)
         let navigationController = UINavigationController(rootViewController: postsViewController)

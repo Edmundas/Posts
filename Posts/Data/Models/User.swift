@@ -15,4 +15,10 @@ struct User: Decodable {
         self.id = user.id
         self.name = user.name
     }
+
+    init(_ user: UserEntity) {
+        self.id = Int(user.id)
+        self.name = user.name
+    }
+    
 }
